@@ -1,0 +1,62 @@
+# =========================
+# Build outputs
+# =========================
+target/
+build/
+.gradle/
+
+# Maven wrapper (keep)
+!.mvn/wrapper/maven-wrapper.jar
+
+# =========================
+# Test reports & artifacts
+# =========================
+# Allure
+allure-results/
+allure-report/
+target/allure-results/
+target/allure-report/
+
+# UI automation artifacts
+screenshots/
+downloads/
+traces/
+videos/
+
+# Logs
+*.log
+
+# =========================
+# IDEs
+# =========================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
