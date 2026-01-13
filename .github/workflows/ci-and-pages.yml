@@ -4,15 +4,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-    inputs:
-      headless:
-        description: "Run browser in headless mode"
-        required: false
-        default: "true"
-        type: choice
-        options:
-          - "true"
-          - "false"
 
 permissions:
   contents: read
@@ -44,8 +35,7 @@ jobs:
       - name: Run tests (headless)
         run: mvn -q test
         env:
-          # Use workflow input when manually triggered; otherwise default to true
-          HEADLESS: ${{ github.event_name == 'workflow_dispatch' && inputs.headless || 'true' }}
+          HEADLESS: "true"
 
       - name: Upload Surefire reports
         if: always()
