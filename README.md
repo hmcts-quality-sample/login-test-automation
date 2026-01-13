@@ -177,7 +177,7 @@ This is useful for:
 3. Select the workflow:  
    **CI + Publish Allure Report (GitHub Pages)**
 4. Click **Run workflow**
-5. Choose the branch (typically `main`)
+5. Choose the branch (`main`)
 6. Click **Run workflow**
 
 The workflow will start immediately and run the full pipeline:
