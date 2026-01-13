@@ -1,22 +1,22 @@
 <configuration>
 
   <!-- Console output -->
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE">
     <encoder>
       <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
     </encoder>
   </appender>
 
   <!-- Keep your test output readable -->
+  <logger level="OFF" name="org.apache.hc.client5.http.wire"/>
+
+  <!-- Suppress extremely noisy HTTP wire logs -->
+  <logger level="OFF" name="org.apache.hc.client5.http.headers"/>
+  <logger level="INFO" name="io.github.bonigarcia.wdm"/>
+
+  <!-- Reduce WebDriverManager chatter -->
   <root level="INFO">
     <appender-ref ref="CONSOLE"/>
   </root>
-
-  <!-- Suppress extremely noisy HTTP wire logs -->
-  <logger name="org.apache.hc.client5.http.wire" level="OFF"/>
-  <logger name="org.apache.hc.client5.http.headers" level="OFF"/>
-
-  <!-- Reduce WebDriverManager chatter -->
-  <logger name="io.github.bonigarcia.wdm" level="INFO"/>
 
 </configuration>

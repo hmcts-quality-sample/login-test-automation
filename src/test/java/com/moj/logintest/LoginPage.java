@@ -17,7 +17,21 @@ public class LoginPage {
   @FindBy(css = "form#login button[type='submit']")
   public WebElement loginButton;
 
+  @FindBy(css = ".flash.success")
+  public WebElement successMessage;
+
+  @FindBy(css = ".flash.error")
+  public WebElement errorMessage;
+
   public LoginPage(WebDriver driver) {
     PageFactory.initElements(driver, this);
+  }
+
+  public String getSuccessMessageText() {
+    return successMessage.getText().trim();
+  }
+
+  public String getErrorMessageText() {
+    return errorMessage.getText().trim();
   }
 }

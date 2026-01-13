@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Login Automation (UI)" verbose="1" parallel="false">
+  <test name="Authentication - Happy/Negative Paths">
+    <classes>
+      <class name="com.moj.logintest.LoginPageTest"/>
+    </classes>
+  </test>
+</suite>
