@@ -53,11 +53,10 @@ public class SecurePage {
   public LoginPage logout() {
     waitUntilLoaded(Duration.ofSeconds(5));
     driver.findElement(LOGOUT_BUTTON).click();
+    LoginPage loginPage = new LoginPage(driver);
+    loginPage.waitUntilLoaded(Duration.ofSeconds(5));
 
-    new WebDriverWait(driver, Duration.ofSeconds(5))
-        .until(ExpectedConditions.urlContains("/login"));
-
-    return new LoginPage(driver);
+    return loginPage;
   }
 
   public void waitUntilLoaded(Duration timeout) {

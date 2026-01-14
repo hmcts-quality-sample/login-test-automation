@@ -1,10 +1,14 @@
 package com.moj.logintest;
 
+import java.time.Duration;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 // page_url = https://the-internet.herokuapp.com/login
 public class LoginPage {
@@ -54,10 +58,6 @@ public class LoginPage {
     return !driver.findElements(FLASH_ERROR).isEmpty();
   }
 
-//  public boolean isSuccessMessagePresent() {
-//    return !driver.findElements(FLASH_SUCCESS).isEmpty();
-//  }
-
   public String getSuccessMessageText() {
     return successMessage.getText().trim();
   }
@@ -70,4 +70,16 @@ public class LoginPage {
     return isErrorMessagePresent() && errorMessage.isDisplayed();
   }
 
+  public void waitUntilLoaded(Duration timeout) {
+    WebDriverWait wait = new WebDriverWait(driver, timeout);
+    wait.ignoring(org.openqa.selenium.StaleElementReferenceException.class);
+    wait.ignoring(org.openqa.selenium.NoSuchElementException.class);
+
+    wait.until(ExpectedConditions.urlContains("/login"));
+
+    wait.until(d -> "complete".equals(
+        ((JavascriptExecutor) d).executeScript("return document.readyState")));
+
+    wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+  }
 }
