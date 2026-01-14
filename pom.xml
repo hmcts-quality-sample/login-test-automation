@@ -33,6 +33,9 @@
 
           <!-- Useful for CI readability -->
           <reportFormat>brief</reportFormat>
+          <suiteXmlFiles>
+            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
           <trimStackTrace>false</trimStackTrace>
           <useFile>true</useFile>
         </configuration>
