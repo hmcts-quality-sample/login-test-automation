@@ -54,9 +54,9 @@ public class LoginPage {
     return !driver.findElements(FLASH_ERROR).isEmpty();
   }
 
-  public boolean isSuccessMessagePresent() {
-    return !driver.findElements(FLASH_SUCCESS).isEmpty();
-  }
+//  public boolean isSuccessMessagePresent() {
+//    return !driver.findElements(FLASH_SUCCESS).isEmpty();
+//  }
 
   public String getSuccessMessageText() {
     return successMessage.getText().trim();

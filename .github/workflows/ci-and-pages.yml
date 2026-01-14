@@ -5,10 +5,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Least privilege at workflow level
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -17,6 +16,8 @@ concurrency:
 jobs:
   test-and-build-report:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
@@ -68,6 +69,8 @@ jobs:
           tar -xzf allure.tgz
 
           echo "${PWD}/allure-${ALLURE_VERSION}/bin" >> "${GITHUB_PATH}"
+
+          # Use direct path in THIS step (PATH isn't updated yet)
           "${PWD}/allure-${ALLURE_VERSION}/bin/allure" --version
 
       - name: Generate Allure HTML report
@@ -75,10 +78,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
+          # Confirm allure is available on PATH in this step
+          allure --version
+
           RESULTS_DIR="allure-results"
           if [ -d "target/allure-results" ]; then
             RESULTS_DIR="target/allure-results"
           fi
+
           allure generate "${RESULTS_DIR}" --clean -o target/allure-report
 
       - name: Upload Pages artifact
@@ -91,7 +99,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test-and-build-report
+    # Deploy Pages only from main branch
     if: always() && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

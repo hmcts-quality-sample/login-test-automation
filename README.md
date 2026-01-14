@@ -151,10 +151,16 @@ The implemented tests focus on **behavioural correctness**, not UI styling.
 
 ---
 
-### Run Tests Locally (Headed)
+### Run Tests Locally (Local default: Headed)
 
 ```bash
 mvn test
+```
+
+### Run Tests Locally (Headless)
+
+```bash
+mvn test -Dheadless=true
 ```
 
 ## Running the CI Workflow Manually (GitHub Actions)

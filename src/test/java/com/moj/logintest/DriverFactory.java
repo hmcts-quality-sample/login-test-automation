@@ -55,22 +55,17 @@ public final class DriverFactory {
   }
 
   private static boolean resolveHeadless() {
-    // 1) System property takes priority: -Dheadless=true|false
     String sys = System.getProperty("headless");
-    if (sys != null) {
-      return Boolean.parseBoolean(sys);
-    }
+    if (sys != null) return Boolean.parseBoolean(sys);
 
-    // 2) Env var: HEADLESS=true|false
     String env = System.getenv("HEADLESS");
-    if (env != null) {
-      return Boolean.parseBoolean(env);
-    }
+    if (env != null) return Boolean.parseBoolean(env);
 
-    // 3) CI default
     String ci = System.getenv("CI");
-    return ci != null && ci.equalsIgnoreCase("true");
+    if (ci != null && ci.equalsIgnoreCase("true")) return true;
 
-    // 4) Local default
+    // Local default: headed
+    return false;
   }
+
 }

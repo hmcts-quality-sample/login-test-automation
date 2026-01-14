@@ -50,9 +50,14 @@ public class SecurePage {
     return isSuccessMessagePresent() && successMessage.isDisplayed();
   }
 
-  public void logout() {
+  public LoginPage logout() {
     waitUntilLoaded(Duration.ofSeconds(5));
     driver.findElement(LOGOUT_BUTTON).click();
+
+    new WebDriverWait(driver, Duration.ofSeconds(5))
+        .until(ExpectedConditions.urlContains("/login"));
+
+    return new LoginPage(driver);
   }
 
   public void waitUntilLoaded(Duration timeout) {
